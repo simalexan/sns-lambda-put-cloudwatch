@@ -18,13 +18,16 @@ saveToCloudWatch = message => {
 };
 
 convertToMetricData = function (message) {
-    const props = Object.keys(message);
-    const dimensions = props.map(property => {
-        return toDimension(property, message[property]);
-    })
+    let props = [], dimensions = [];
+    if (typeof message !== 'string') {
+        props = Object.keys(message);
+        dimensions = props.map(property => toDimension(property, message[property]));
+    } else {
+        dimensions = [toDimension('Message', message)];
+    }
     return {
-        MetricName: 'Message',
-        Unit: 'Message',
+        MetricName: 'Count',
+        Unit: 'Count',
         Value: 1.0,
         Dimensions: dimensions,
         StorageResolution: 1,
