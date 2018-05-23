@@ -1,0 +1,14 @@
+{
+  "name": "sns-lambda-put-cloudwatch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "package": "aws cloudformation package --template-file template.yaml --output-template-file output.yaml --s3-bucket sns-lambda-put-cloudwatch-bucket",
+    "deploy": "aws cloudformation deploy --template-file output.yaml --stack-name sns-lambda-put-cloudwatch --capabilities CAPABILITY_IAM",
+    "qd": "npm run package && npm run deploy"
+  },
+  "keywords": [],
+  "author": "Aleksandar Simovic <alexander.simovic@gmail.com>",
+  "license": "MIT"
+}
